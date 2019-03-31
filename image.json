@@ -1,0 +1,53 @@
+{
+    "variables": {
+        "linode_token": "{{env `LINODE_TOKEN`}}",
+        "deploy_repo": "https://github.com/akerl/deploy-wireguard-server",
+        "deploy_dir": "/opt/deploy"
+    },
+    "builders": [
+        {
+            "type": "linode",
+            "linode_token": "{{user `linode_token`}}",
+
+            "region": "us-east",
+            "swap_size": 256,
+            "image": "linode/ubuntu18.04",
+            "instance_type": "g6-standard-1",
+            "instance_label": "packer-wireguard-{{timestamp}}",
+
+            "image_label": "packer-wireguard-{{timestamp}}",
+            "image_description": "",
+
+            "ssh_username": "root"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "assets/sshd_config",
+            "destination": "/etc/ssh/sshd_config"
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "apt update",
+                "apt upgrade -y",
+                "apt autoremove -y",
+                "apt install -y python-pip build-essential python-dev python-virtualenv git vim-nox",
+                "systemctl restart sshd"
+            ]
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "git clone {{user `deploy_repo`}} {{user `deploy_dir`}}",
+                "cd {{user `deploy_dir`}}",
+                "virtualenv env",
+                "source env/bin/activate",
+                "pip install -r requirements.txt",
+                "touch config.cfg",
+                "ansible-playbook --skip-tags users main.yml"
+            ]
+        }
+    ]
+}
