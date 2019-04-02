@@ -7,6 +7,7 @@ git clone $DEPLOY_REPO $DEPLOY_DIR
 cd $DEPLOY_DIR
 
 virtualenv env
+export PS1=""
 source env/bin/activate
 pip install -r requirements.txt
 
