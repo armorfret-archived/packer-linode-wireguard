@@ -1,0 +1,20 @@
+dist: trusty
+env:
+  global:
+  - PACKERBIN_DIR=$HOME/packerbin
+  - PACKER_VERSION=1.3.5
+install:
+- GOBIN=~/.packer.d/plugins go install github.com/linode/packer-builder-linode
+- "./scripts/download_packer.sh $PACKER_VERSION"
+script:
+- "~/packerbin/packer validate -var 'linode_token=blank' image.json"
+deploy:
+  provider: script
+  script: "~/packerbin/packer build image.json"
+  skip_cleanup: true
+  on:
+    tags: true
+notifications:
+  email: false
+  slack:
+    secure: KwZ0h+FcwRA1DjkdAZjBkiDMvbh4ySXxf0XXjqrxpNz1OEs6n+MQ7JHtPtXAalCCIkA5U+8R55M+Igd3xby2CspNuuyZbfZ48OXfAWMXHsF2qJGzpw+CxdZrTXBRoczA751MU4cK61K6juiE08fzcRqpHgms0Wg8JJFFfml9qzcJWyect8U2TXtGP0fZWn4TBCL47jr3gUYFO8CwHpeJVJg5FJwzLhfWyfDW26o1y5oP5JRMp62jrckhyjUR08Zuf8bHxKOOKE6qQdZckHVwuBuWyL0V2cV4eaFXAZvlQuzScjeyeMuKtl1YaVbRsI8FckLb2NvlbxKlsRaMuri6GV02sYJdaWcF6FW2uJX4RGzXnjWUwLYmwGne2pwflCSJYdw+u1XoOx84OxKrJp1v9uM1Ih5LcCayWTRB63Ie6txbayF7nMqVyUNhYH/aC0x7zVgRTNxU5aRapeRGkmch/ZNV23pxyCC93bsxY8SreR3zLWlTcjCAkJCGpNyzLGRdNSJXRWUiK9hBEINAKPJIHd214iTyro7QiUQZnMvFgfyMthKiPSi7yRnF0+gRWPC6gzaYYVxLiIUn9ypITVmJYoM9Lzc/szoLqtvIFk/sJKiXVvWPD7AL8cFQGmvg++eEJGERfBCT4Lv/i+7Wm35+j70sUj8wpp6vJEz6gXpbnFg=

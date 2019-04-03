@@ -1,0 +1,26 @@
+Prospectus.extra_dep('file', 'prospectus_travis')
+
+item do
+  noop
+
+  extend ProspectusTravis::Build.new('armorfret/packer-linode-wireguard')
+
+  deps do
+    item do
+      name 'packer'
+
+      expected do
+        github_tag
+        repo 'hashicorp/packer'
+        regex /^v?([\d.]+)$/
+        filter /^v?([\d.]+)$/
+      end
+
+      actual do
+        grep
+        file '.travis.yml'
+        regex /^\s+- PACKER_VERSION=([\d.]+)$/
+      end
+    end
+  end
+end
