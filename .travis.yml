@@ -1,5 +1,4 @@
-dist: trusty
-language: go
+dist: xenial
 env:
   global:
   - PACKERBIN_DIR=$HOME/packerbin
