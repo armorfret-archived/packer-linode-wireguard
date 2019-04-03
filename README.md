@@ -2,6 +2,7 @@ packer-linode-wirguard
 =========
 
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://tldrlegal.com/license/mit-license)
+[![Build Status](https://img.shields.io/travis/com/armorfret/packer-linode-wireguard.svg)](https://travis-ci.com/armorfret/packer-linode-wireguard)
 
 Packer template to build images for [Wireguard](https://wireguard.com). Uses [this Ansible playbook](https://github.com/akerl/deploy-wireguard-server).
 
