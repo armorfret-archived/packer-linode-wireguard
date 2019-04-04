@@ -3,6 +3,7 @@ env:
   global:
   - PACKERBIN_DIR=$HOME/packerbin
   - PACKER_VERSION=1.3.5
+  - secure: VxHj68sRsVP74sLq0QuI8Vebi/X4dnSCKdqAvnZha7dE5x22CsJrd+zTGWXj0Vai4KGWRKDd4VK99oIErrC+8jR4S+jOq0PwoNSMXZMsrTJTGw4CimYeQbZwTd/EsnXgrzpj5pS2vSu3jBMTpvuYo39cV3hjQ2/9q8pgcBHmSBFeq775WCFwja3HyME8Lu1mcC5e9Alqy/sjD0RXeDgbnQe26Qb1MeymiRK6HpW3y0yAvDpeozFK000CzkPI2rbKsN5wCLsrrDbyMn1fQkd7QdxxMiBfm7qOvsWF9XcGWzvutRS6sKa3QU11REueA8KrAAE8C0xWnGagj6RruYcOWGniuYaMFM0fGwEV9R9DyDM8C/Brp1Tk6+QnrS93BXw0W43QuhgRHBxfoOo/v8vtzmbJJ36D0AKIna8cIuowRNEB2d2E4qqwI54L0lQg12gh8jsPhKcHgGMoHWkn0reho1BlTnyzdpBqIpT1YPc3NtivpjUieajU4PttR4jxWokPFlre7mQoITdWAr2LXANI29SlfS2+MylIVLjrorjGCaPMl1okWbhxrsqslDzjrdk8k0O9mqXEWlGaX/RmpYJK7G2kaBS5ghuesfb79U/qmfzh1PEdVmo+fip6IX7xZ61CAitqUvO6pCMV062JZQI1c6RgvlKPlwVYipsE6yIWB+I=
 install:
 - GO111MODULE=on GOBIN=~/.packer.d/plugins go get github.com/linode/packer-builder-linode
 - "./scripts/download_packer.sh $PACKER_VERSION"
