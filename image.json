@@ -36,11 +36,8 @@
             ]
         },
         {
-            "type": "ansible-local",
+            "type": "ansible",
             "playbook_file": "ansible/main.yml",
-            "playbook_dir": "ansible",
-            "staging_directory": "/opt/deploy",
-            "clean_staging_directory": false,
             "extra_arguments": [
                 "--extra-vars", "ansible_python_interpreter=/usr/bin/python3",
                 "--skip-tags", "users"
