@@ -14,7 +14,6 @@
             "image": "linode/ubuntu18.04",
             "instance_type": "g6-standard-1",
             "instance_label": "packer-wireguard-{{timestamp}}",
-
             "image_label": "packer-wireguard-{{timestamp}}",
             "image_description": "",
 
@@ -23,19 +22,17 @@
     ],
     "provisioners": [
         {
-            "type": "file",
-            "source": "assets/sshd_config",
-            "destination": "/etc/ssh/sshd_config"
+            "type": "ansible",
+            "playbook_file": "ansible/linode/bootstrap.yml",
+            "extra_arguments": [
+                "--extra-vars", "ansible_python_interpreter=/usr/bin/python3"
+            ]
         },
         {
-            "type": "shell",
-            "scripts": [
-                "assets/setup.sh",
-                "assets/run.sh"
-            ],
-            "environment_vars": [
-                "DEPLOY_REPO={{user `deploy_repo`}}",
-                "DEPLOY_DIR={{user `deploy_dir`}}"
+            "type": "ansible",
+            "playbook_file": "ansible/linode/setup.yml",
+            "extra_arguments": [
+                "--extra-vars", "ansible_python_interpreter=/usr/bin/python3"
             ]
         }
     ]
