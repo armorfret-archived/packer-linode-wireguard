@@ -7,8 +7,7 @@ env:
 install:
 - GO111MODULE=on GOBIN=~/.packer.d/plugins go get github.com/linode/packer-builder-linode
 - "./scripts/download_packer.sh $PACKER_VERSION"
-- sudo apt update
-- sudo apt install -y ansible
+- sudo pip install ansible
 script:
 - "~/packerbin/packer validate -var 'linode_token=blank' image.json"
 deploy:
