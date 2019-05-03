@@ -1,8 +1,6 @@
 {
     "variables": {
         "linode_token": "{{env `LINODE_TOKEN`}}",
-        "deploy_repo": "https://github.com/akerl/deploy-wireguard-server",
-        "deploy_dir": "/opt/deploy"
     },
     "builders": [
         {
